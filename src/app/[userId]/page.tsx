@@ -11,7 +11,6 @@ interface UserDetailsProps {
 const UserDetails = ({ params }: UserDetailsProps) => {
   return (
     <div className='ml-16'>
-      <Navbar id={params.userId}/>
       <h1>Hello User {params.userId}</h1>
     </div>
   );

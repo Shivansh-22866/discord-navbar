@@ -7,13 +7,12 @@ interface UserDetailsProps {
     };
 }
 
-function Dashboard({ params }: UserDetailsProps) {
+function Chats({ params }: UserDetailsProps) {
   return (
     <div className='ml-16'>
-        <Navbar id={params.userId}/>
-        <h1>{params.userId}: Dashboard</h1>
+        <h1>{params.userId}: Chats</h1>
     </div>
   )
 }
 
-export default Dashboard
+export default Chats

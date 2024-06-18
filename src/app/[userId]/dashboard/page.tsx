@@ -10,8 +10,7 @@ interface UserDetailsProps {
 function Dashboard({ params }: UserDetailsProps) {
   return (
     <div className='ml-16'>
-        <Navbar id={params.userId}/>
-        <h1>{params.userId}: Settings</h1>
+        <h1>{params.userId}: Dashboard</h1>
     </div>
   )
 }
