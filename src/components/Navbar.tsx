@@ -2,20 +2,19 @@ import Link from 'next/link';
 import { FaHome, FaSlidersH, FaCompass, FaComments, FaChartBar } from 'react-icons/fa';
 import { IoSettings } from "react-icons/io5";
 import NavbarIcon from './NavbarIcon';
+import { ReactNode } from 'react';
 
 interface NavbarProps {
   id: string;
+  links: {
+    href: string;
+    icon: React.ReactNode;
+    text: string;
+  }[];
+  footer: React.ReactNode;
 }
 
-const links = [
-  { href: '/', icon: <FaHome />, text: 'Home 🏠' },
-  { href: '/dashboard', icon: <FaSlidersH />, text: 'Dashboard 📊' },
-  { href: '/discover', icon: <FaCompass />, text: 'Discover 🔍' },
-  { href: '/chats', icon: <FaComments />, text: 'Chats 💬' },
-  { href: '/reports', icon: <FaChartBar />, text: 'Reports 📈' },
-];
-
-export default function Navbar({ id }: NavbarProps) {
+export default function Navbar({ id, links, footer}: NavbarProps) {
   if (!id) {
     return null;
   }
@@ -32,6 +31,9 @@ export default function Navbar({ id }: NavbarProps) {
             </li>
           ))}
         </ul>
+        <div>
+          {footer}
+        </div>
       </div>
     </nav>
   );

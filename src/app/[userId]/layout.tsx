@@ -2,6 +2,9 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import '../globals.css';
+import { FaChartBar, FaComments, FaCompass, FaHome, FaSlidersH } from 'react-icons/fa';
+import Image from "next/image";
+import Footer from '@/components/Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +12,14 @@ interface LayoutProps {
     userId?: string;
   };
 }
+
+const links = [
+  { href: '/', icon: <FaHome />, text: 'Home 🏠' },
+  { href: '/dashboard', icon: <FaSlidersH />, text: 'Dashboard 📊' },
+  { href: '/discover', icon: <FaCompass />, text: 'Discover 🔍' },
+  { href: '/chats', icon: <FaComments />, text: 'Chats 💬' },
+  { href: '/reports', icon: <FaChartBar />, text: 'Reports 📈' },
+];
 
 const Layout: React.FC<LayoutProps> = ({ children, params }) => {
   const showNavbar = !!params.userId;
@@ -20,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => {
         <title>Frover</title>
       </head>
       <body>
-        {showNavbar && <Navbar id={id}/>}
+        {showNavbar && <Navbar id={id} links={links} footer={<Footer/>}></Navbar>}
         <main>{children}</main>
       </body>
     </html>
