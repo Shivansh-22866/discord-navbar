@@ -1,6 +1,6 @@
-'use client'
-import React from 'react';
-import CustomDialog from '../../../components/CustomDialog';
+'use client';
+import React, { useState } from 'react';
+import CustomInput from '@/components/CustomInput';
 
 interface UserDetailsProps {
   params: {
@@ -8,21 +8,76 @@ interface UserDetailsProps {
   };
 }
 
-function Dashboard({ params }: UserDetailsProps) {
-  const dialogContent = {
-    title: 'Frover',
-    userName: 'User123',
-    email: 'abc@xyz.com',
-    buttons: ['Settings', 'Feedback', 'Help'],
-    userImage: '/logo.jpeg'
+const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
+  const [inputValue, setInputValue] = useState('');
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+
+  const textInputOptions = {
+    type: 'text',
+    includeAll: [],
+    includeOneOf: ['a', 'b', 'c'],
+    exclude: ['admin'],
+    placeholder: 'Enter your input',
+    required: true,
+    minLength: 5,
+    maxLength: 100,
+    value: inputValue,
+    setValue: setInputValue,
+    pattern: '^[a-zA-Z ]*$',
+    name: 'text-input' // Example name attribute
+  };
+
+  const emailInputOptions = {
+    type: 'email',
+    includeAll: [],
+    includeOneOf: [],
+    exclude: ['.tk', '@yaml'],
+    placeholder: 'Enter your email',
+    required: true,
+    minLength: 5,
+    maxLength: 100,
+    value: emailValue,
+    setValue: setEmailValue,
+    pattern: '^\\S+@\\S+\\.\\S+$',
+    name: 'email-input' // Example name attribute
+  };
+
+  const passwordInputOptions = {
+    type: 'password',
+    includeAll: [],
+    includeOneOf: [],
+    exclude: [],
+    placeholder: 'Enter your password',
+    required: true,
+    minLength: 8,
+    maxLength: 20,
+    value: passwordValue,
+    setValue: setPasswordValue,
+    pattern: '^[a-zA-Z0-9!@#$%^&*]*$',
+    name: 'password-input' // Example name attribute
   };
 
   return (
-    <div className='ml-16'>
-      <h1>{params.userId}: Dashboard</h1>
-      <CustomDialog content={dialogContent} />
+    <div className="ml-16">
+      <h1>Hello User {params.userId}</h1>
+      <div className="p-4 w-[360px]">
+        <form onSubmit={handleSubmit}>
+          <CustomInput options={textInputOptions} label="Text Input" />
+          <CustomInput options={emailInputOptions} label="Email Input" />
+          <CustomInput options={passwordInputOptions} label="Password Input" />
+          <button type="submit" className="btn btn-primary mt-4 bg-gray-800 px-4 py-2 rounded-2xl hover:bg-gray-600 hover:rounded-md transition-all duration-[0.5s]">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
-}
+};
 
-export default Dashboard;
+export default UserDetails;

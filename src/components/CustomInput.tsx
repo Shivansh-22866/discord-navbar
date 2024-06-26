@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 type InputProps = {
   options: {
     type: 'text' | 'number' | 'tel' | 'url' | 'email' | 'password'; 
-    include: string[];
-    exclude: string[];
+    includeAll?: string[];
+    includeOneOf?: string[];
+    exclude?: string[]; 
     placeholder: string;
     required: boolean;
     minLength?: number;
@@ -12,6 +13,7 @@ type InputProps = {
     value: string;
     setValue: (value: string) => void;
     pattern: string;
+    name: string;
   };
   label: string;
   isVisible?: boolean;
@@ -35,15 +37,18 @@ const CustomInput: React.FC<InputProps> = ({
 
     if (options.pattern && !new RegExp(options.pattern).test(value)) {
       errorMessage = `Invalid input format`;
-    }
-
-    else if (
-      options.include.length > 0 &&
-      !options.include.some(item => value.includes(item))
-    ) {
-      errorMessage = `Must include one of: ${options.include.join(', ')}`;
     } else if (
-      options.exclude.length > 0 &&
+      options.includeAll && options.includeAll.length > 0 &&
+      !options.includeAll.every(item => value.includes(item))
+    ) {
+      errorMessage = `Must include all of: ${options.includeAll.join(', ')}`;
+    } else if (
+      options.includeOneOf && options.includeOneOf.length > 0 &&
+      !options.includeOneOf.some(item => value.includes(item))
+    ) {
+      errorMessage = `Must include one of: ${options.includeOneOf.join(', ')}`;
+    } else if (
+      options.exclude && options.exclude.length > 0 &&
       options.exclude.some(item => value.includes(item))
     ) {
       errorMessage = `Cannot include: ${options.exclude.join(', ')}`;
@@ -53,11 +58,13 @@ const CustomInput: React.FC<InputProps> = ({
 
     setError(errorMessage);
 
-    const inputElement = document.getElementById(
-      `${label.replace(/\s+/g, '-').toLowerCase()}-input`
-    ) as HTMLInputElement | null;
-    if (inputElement) {
-      inputElement.setCustomValidity(errorMessage);
+    if (options.name) {
+      const inputElement = document.getElementById(
+        `${options.name.replace(/\s+/g, '-').toLowerCase()}-input`
+      ) as HTMLInputElement | null;
+      if (inputElement) {
+        inputElement.setCustomValidity(errorMessage);
+      }
     }
   };
 
@@ -67,7 +74,7 @@ const CustomInput: React.FC<InputProps> = ({
         {label}
       </label>
       <input
-        id={`${label.replace(/\s+/g, '-').toLowerCase()}-input`}
+        id={options.name ? `${options.name.replace(/\s+/g, '-').toLowerCase()}-input` : ''}
         type={options.type}
         className={`mt-1 block w-full px-3 py-2 border ${
           error ? 'border-red-500' : 'border-gray-300'
@@ -76,9 +83,14 @@ const CustomInput: React.FC<InputProps> = ({
         value={options.value}
         onChange={handleChange}
         required={options.required}
+        onInvalid={(e) => {
+          e.preventDefault();
+          setError(e.currentTarget.validationMessage);
+        }}
         minLength={options.minLength}
         maxLength={options.maxLength}
         pattern={options.pattern}
+        name={options.name}
       />
       {error && (
         <p className="mt-1 text-sm text-red-500">{error}</p>

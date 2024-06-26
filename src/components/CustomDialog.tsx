@@ -1,5 +1,3 @@
-// CustomDialog.tsx
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogTrigger, DialogContent, DialogClose, DialogHeader, DialogFooter, DialogTitle } from './ui/dialog';
 import { Drawer, DrawerTrigger, DrawerContent, DrawerClose, DrawerHeader, DrawerFooter, DrawerTitle } from './ui/drawer';
@@ -11,14 +9,13 @@ interface DialogContentProps {
     userName: string;
     email: string;
     buttons: string[];
-    userImage: string; // Adding userImage prop
+    userImage: string; 
   };
 }
 
 const CustomDialog: React.FC<DialogContentProps> = ({ content }) => {
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
-  // Use local state to manage the dialog visibility
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {

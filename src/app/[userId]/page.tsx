@@ -28,7 +28,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
     maxLength: 100,
     value: inputValue,
     setValue: setInputValue,
-    pattern: '^[a-zA-Z ]*$'
+    pattern: '^[a-zA-Z ]*$',
+    name: 'text-input'
   };
 
   const emailInputOptions = {
@@ -41,7 +42,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
     maxLength: 100,
     value: emailValue,
     setValue: setEmailValue,
-    pattern: '^\\S+@\\S+\\.\\S+$'
+    pattern: '^\\S+@\\S+\\.\\S+$',
+    name: 'email-input'
   };
 
   const passwordInputOptions = {
@@ -54,7 +56,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
     maxLength: 20,
     value: passwordValue,
     setValue: setPasswordValue,
-    pattern: '^[a-zA-Z0-9!@#$%^&*]*$'
+    pattern: '^[a-zA-Z0-9!@#$%^&*]*$',
+    name: 'password-input'
   };
 
   return (
