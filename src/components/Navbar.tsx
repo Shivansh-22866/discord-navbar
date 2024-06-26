@@ -20,7 +20,7 @@ export default function Navbar({ id, links, footer}: NavbarProps) {
   }
 
   return (
-    <nav className="">
+    <div className="">
       <div className="fixed top-0 left-0 h-screen w-16 flex flex-col justify-between bg-[#202225]">
         <ul className="">
           {links.map((link, index) => (
@@ -35,6 +35,6 @@ export default function Navbar({ id, links, footer}: NavbarProps) {
           {footer}
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

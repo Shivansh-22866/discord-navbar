@@ -5,6 +5,7 @@ import '../globals.css';
 import { FaChartBar, FaComments, FaCompass, FaHome, FaSlidersH } from 'react-icons/fa';
 import Image from "next/image";
 import Footer from '@/components/Footer';
+import { Providers } from '../providers';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -31,8 +32,10 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => {
         <title>Frover</title>
       </head>
       <body>
-        {showNavbar && <Navbar id={id} links={links} footer={<Footer/>}></Navbar>}
-        <main>{children}</main>
+        <Providers>
+          {showNavbar && <Navbar id={id} links={links} footer={<Footer/>}></Navbar>}
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );

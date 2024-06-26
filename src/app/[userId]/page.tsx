@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import CustomInput from '@/components/CustomInput';
+import { Button } from '@nextui-org/button';
 
 interface UserDetailsProps {
   params: {
@@ -68,9 +69,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
           <CustomInput options={textInputOptions} label="Text Input" />
           <CustomInput options={emailInputOptions} label="Email Input" />
           <CustomInput options={passwordInputOptions} label="Password Input" />
-          <button type="submit" className="btn btn-primary mt-4 bg-gray-800 px-4 py-2 rounded-2xl hover:bg-gray-600 hover:rounded-md transition-all duration-[0.5s]">
-            Submit
-          </button>
+          <Button>Submit</Button>
         </form>
       </div>
     </div>
