@@ -1,34 +1,33 @@
-'use client'
-import React from 'react'
-import Cards from './cards';
+'use client';
+import React from 'react';
 import CustomCard from '@/components/CustomCard';
 
 interface UserDetailsProps {
-    params: {
-      userId: string;
-    };
+  params: {
+    userId: string;
+  };
 }
 
 function Discover({ params }: UserDetailsProps) {
   const list = [
     {
       title: "Orange",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$5.50",
     },
     {
       title: "Tangerine",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$3.00",
     },
     {
       title: "Raspberry",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$10.00",
     },
     {
       title: "Lemon",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$5.30",
     },
     {
@@ -38,36 +37,36 @@ function Discover({ params }: UserDetailsProps) {
     },
     {
       title: "Lemon 2",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$8.00",
     },
     {
       title: "Banana",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$7.50",
     },
     {
       title: "Watermelon",
-      img: "/public/logo.jpeg",
+      img: "/logo.jpeg",
       price: "$12.20",
     },
   ];
 
   return (
     <div className='ml-16'>
-        <h1>{params.userId}: Discover</h1>
-        <div className="gap-4 grid grid-cols-4 sm:grid-cols-2">
-      {list.map((item, index) => (
-        <CustomCard
-          key={index}
-          title={item.title}
-          image={item.img}
-          label={item.price}
-        />
-      ))}
+      <h1>{params.userId}: Discover</h1>
+      <div className="gap-4 grid grid-cols-4 sm:grid-cols-2">
+        {list.map((item, index) => (
+          <CustomCard
+            key={index}
+            title={item.title}
+            image={item.img}
+            label={item.price}
+          />
+        ))}
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Discover
+export default Discover;

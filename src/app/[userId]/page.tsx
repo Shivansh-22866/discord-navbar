@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useState } from 'react';
 import CustomInput from '@/components/CustomInput';
 import { Button } from '@nextui-org/button';
@@ -13,15 +13,91 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
   const [inputValue, setInputValue] = useState('');
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [inputError, setInputError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Form submitted');
+
+    const trimmedInputValue = inputValue.trim();
+    const trimmedEmailValue = emailValue.trim();
+    const trimmedPasswordValue = passwordValue.trim();
+
+    setInputValue(trimmedInputValue);
+    setEmailValue(trimmedEmailValue);
+    setPasswordValue(trimmedPasswordValue);
+
+    if (trimmedInputValue === '') {
+      setInputError('Please enter your input');
+    } else {
+      setInputError('');
+    }
+
+    if (trimmedEmailValue === '') {
+      setEmailError('Please enter your email');
+    } else {
+      setEmailError('');
+    }
+
+    if (trimmedPasswordValue === '') {
+      setPasswordError('Please enter your password');
+    } else {
+      setPasswordError('');
+    }
+
+    const textInputError = validateInput({
+      ...textInputOptions,
+      value: trimmedInputValue,
+    });
+    const emailInputError = validateInput({
+      ...emailInputOptions,
+      value: trimmedEmailValue,
+    });
+    const passwordInputError = validateInput({
+      ...passwordInputOptions,
+      value: trimmedPasswordValue,
+    });
+
+    if (textInputError || emailInputError || passwordInputError ||
+        inputError || emailError || passwordError) {
+      setIsFormValid(false);
+      console.log('Form has errors. Please correct them.');
+    } else {
+      setIsFormValid(true);
+      console.log('Form submitted successfully!');
+    }
+  };
+
+  const validateInput = (options: any) => {
+    let errorMessage = '';
+
+    if (options.pattern && !new RegExp(options.pattern).test(options.value)) {
+      errorMessage = `Invalid input format`;
+    } else if (
+      options.includeAll && options.includeAll.length > 0 &&
+      !options.includeAll.every((item: string) => options.value.includes(item))
+    ) {
+      errorMessage = `Must include all of: ${options.includeAll.join(', ')}`;
+    } else if (
+      options.includeOneOf && options.includeOneOf.length > 0 &&
+      !options.includeOneOf.some((item: string) => options.value.includes(item))
+    ) {
+      errorMessage = `Must include one of: ${options.includeOneOf.join(', ')}`;
+    } else if (
+      options.exclude && options.exclude.length > 0 &&
+      options.exclude.some((item: string) => options.value.includes(item))
+    ) {
+      errorMessage = `Cannot include: ${options.exclude.join(', ')}`;
+    }
+
+    return errorMessage;
   };
 
   const textInputOptions = {
     type: 'text',
-    include: [],
+    includeAll: [],
     exclude: ['admin'],
     placeholder: 'Enter your input',
     required: true,
@@ -35,7 +111,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
 
   const emailInputOptions = {
     type: 'email',
-    include: [],
+    includeAll: [],
     exclude: ['.tk', '@yaml'],
     placeholder: 'Enter your email',
     required: true,
@@ -49,7 +125,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
 
   const passwordInputOptions = {
     type: 'password',
-    include: [],
+    includeAll: [],
     exclude: [],
     placeholder: 'Enter your password',
     required: true,
@@ -58,7 +134,12 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
     value: passwordValue,
     setValue: setPasswordValue,
     pattern: '^[a-zA-Z0-9!@#$%^&*]*$',
-    name: 'password-input'
+    name: 'password-input',
+    passwordRequirements: {
+      requireCapitalLetter: true,
+      requireSymbol: true,
+      requireNumber: true,
+    }
   };
 
   return (
@@ -66,10 +147,49 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
       <h1>Hello User {params.userId}</h1>
       <div className="p-4 w-[360px]">
         <form onSubmit={handleSubmit}>
-          <CustomInput options={textInputOptions} label="Text Input" />
-          <CustomInput options={emailInputOptions} label="Email Input" />
-          <CustomInput options={passwordInputOptions} label="Password Input" />
-          <Button>Submit</Button>
+          <CustomInput
+            options={textInputOptions}
+            label="Text Input"
+            isVisible={isFormValid}
+          />
+          {!isFormValid && inputError && (
+            <p className="text-red-500">{inputError}</p>
+          )}
+          {!isFormValid && inputValue && (
+            <p className="text-red-500">{validateInput({
+              ...textInputOptions,
+              value: inputValue.trim(),
+            })}</p>
+          )}
+          <CustomInput
+            options={emailInputOptions}
+            label="Email Input"
+            isVisible={isFormValid}
+          />
+          {!isFormValid && emailError && (
+            <p className="text-red-500">{emailError}</p>
+          )}
+          {!isFormValid && emailValue && (
+            <p className="text-red-500">{validateInput({
+              ...emailInputOptions,
+              value: emailValue.trim(),
+            })}</p>
+          )}
+          <CustomInput
+            options={passwordInputOptions}
+            label="Password Input (Must include at least one number, a capital letter and a symbol, such as @,# etc"
+            isVisible={isFormValid}
+          />
+          {!isFormValid && passwordError && (
+            <p className="text-red-500">{passwordError}</p>
+          )}
+          {!isFormValid && passwordValue && (
+            <p className="text-red-500">{validateInput({
+              ...passwordInputOptions,
+              value: passwordValue.trim(),
+            })}</p>
+          )}
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </div>

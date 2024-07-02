@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+import { Button, Card, Image } from '@nextui-org/react';
+import Link from 'next/link';
 
 interface CustomCardProps {
   title: string;
@@ -9,21 +10,19 @@ interface CustomCardProps {
 
 const CustomCard: React.FC<CustomCardProps> = ({ title, image, label }) => {
   return (
-    <Card shadow="sm" isPressable onPress={() => console.log(`${title} pressed`)}>
-      <CardBody className="overflow-visible p-2 bg-green-400">
-        <Image
-          shadow="sm"
-          radius="lg"
-          width="20%"
-          alt={title}
-          className="w-full object-cover h-[140px]"
+    <Card shadow="sm" isPressable onPress={() => console.log(`${title} pressed`)} 
+    className="border-none rounded-none bg-transparent outline-none w-full bg-red-400"
+    style={{ transform: 'none', transition: 'none' }}>
+      <Link href="/" className="flex flex-row justify-start items-center w-full ">
+        <img
           src={image}
+          alt={title}
+          className="w-[20%] object-cover h-[140px]"
+          style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }} // Optional: Add a shadow for depth
         />
-      </CardBody>
-      <CardFooter className="text-small justify-between p-2">
-        <b>{title}</b>
-        <p className="text-default-500">{label}</p>
-      </CardFooter>
+          <p>{title}</p>
+          <p className="text-default-500">{label}</p>
+      </Link>
     </Card>
   );
 };
