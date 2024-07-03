@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 type InputType = 'text' | 'number' | 'tel' | 'url' | 'email' | 'password';
 
@@ -30,12 +31,17 @@ type InputProps = {
 
 const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true }) => {
   const [error, setError] = useState<string>('');
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const [passwordStrength, setPasswordStrength] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     options.setValue(value);
     validateInput(value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   const validateInput = (value: string) => {
@@ -136,25 +142,36 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
       <label className="block text-sm font-medium text-gray-400">
         {label}
       </label>
-      <input
-        id={options.name ? `${options.name.replace(/\s+/g, '-').toLowerCase()}-input` : ''}
-        type={options.type}
-        className={`mt-1 block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'
-          } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white`}
-        placeholder={options.placeholder}
-        value={options.value}
-        onChange={handleChange}
-        onBlur={() => validateInput(options.value)}
-        required={options.required}
-        onInvalid={(e) => {
-          e.preventDefault();
-          setError(e.currentTarget.validationMessage);
-        }}
-        minLength={options.minLength}
-        maxLength={options.maxLength}
-        pattern={options.pattern}
-        name={options.name}
-      />
+      <div className="relative">
+        <input
+          id={options.name ? `${options.name.replace(/\s+/g, '-').toLowerCase()}-input` : ''}
+          type={options.type === 'password' && !passwordVisible ? 'password' : 'text'}
+          className={`mt-1 block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'
+            } rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm text-white`}
+          placeholder={options.placeholder}
+          value={options.value}
+          onChange={handleChange}
+          onBlur={() => validateInput(options.value)}
+          required={options.required}
+          onInvalid={(e) => {
+            e.preventDefault();
+            setError(e.currentTarget.validationMessage);
+          }}
+          minLength={options.minLength}
+          maxLength={options.maxLength}
+          pattern={options.pattern}
+          name={options.name}
+        />
+        {options.type === 'password' && (
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 px-2 py-1"
+            onClick={togglePasswordVisibility}
+          >
+            {passwordVisible ? <FaRegEyeSlash/> : <FaRegEye/>}
+          </button>
+        )}
+      </div>
       {options.type === 'password' && (
         <div className="flex flex-col items-start mt-4">
           <div className={`w-full h-2 bg-gray-200 rounded-md overflow-hidden`}>

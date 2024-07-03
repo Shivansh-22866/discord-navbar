@@ -29,24 +29,6 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
     setEmailValue(trimmedEmailValue);
     setPasswordValue(trimmedPasswordValue);
 
-    if (trimmedInputValue === '') {
-      setInputError('Please enter your input');
-    } else {
-      setInputError('');
-    }
-
-    if (trimmedEmailValue === '') {
-      setEmailError('Please enter your email');
-    } else {
-      setEmailError('');
-    }
-
-    if (trimmedPasswordValue === '') {
-      setPasswordError('Please enter your password');
-    } else {
-      setPasswordError('');
-    }
-
     const textInputError = validateInput({
       ...textInputOptions,
       value: trimmedInputValue,
@@ -60,8 +42,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
       value: trimmedPasswordValue,
     });
 
-    if (textInputError || emailInputError || passwordInputError ||
-        inputError || emailError || passwordError) {
+    setInputError(textInputError);
+    setEmailError(emailInputError);
+    setPasswordError(passwordInputError);
+
+    if (textInputError || emailInputError || passwordInputError || inputError || emailError || passwordError) {
       setIsFormValid(false);
       console.log('Form has errors. Please correct them.');
     } else {
@@ -96,8 +81,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
   };
 
   const textInputOptions = {
-    type: 'text',
-    includeAll: [],
+    type: 'text' as const,
+    includeAll: [] as string[],
     exclude: ['admin'],
     placeholder: 'Enter your input',
     required: true,
@@ -110,8 +95,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
   };
 
   const emailInputOptions = {
-    type: 'email',
-    includeAll: [],
+    type: 'email' as const,
+    includeAll: [] as string[],
     exclude: ['.tk', '@yaml'],
     placeholder: 'Enter your email',
     required: true,
@@ -124,8 +109,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
   };
 
   const passwordInputOptions = {
-    type: 'password',
-    includeAll: [],
+    type: 'password' as const,
+    includeAll: [] as string[],
     exclude: [],
     placeholder: 'Enter your password',
     required: true,
@@ -177,7 +162,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
           )}
           <CustomInput
             options={passwordInputOptions}
-            label="Password Input (Must include at least one number, a capital letter and a symbol, such as @,# etc"
+            label="Password Input (Must include at least one number, a capital letter and a symbol, such as @,# etc)"
             isVisible={isFormValid}
           />
           {!isFormValid && passwordError && (
