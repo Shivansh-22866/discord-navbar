@@ -31,8 +31,6 @@ type InputProps = {
 
 const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true }) => {
   const [error, setError] = useState<string>('');
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [passwordStrength, setPasswordStrength] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -41,7 +39,7 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
   };
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+    // No longer managing password visibility here
   };
 
   const validateInput = (value: string) => {
@@ -72,10 +70,6 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
       }
     }
 
-    if (options.type === 'password') {
-      setPasswordStrength(checkPasswordStrength(value));
-    }
-
     setError(errorMessage);
 
     if (options.name) {
@@ -83,57 +77,6 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
       if (inputElement) {
         inputElement.setCustomValidity(errorMessage);
       }
-    }
-  };
-
-  const checkPasswordStrength = (password: string) => {
-    if (password.length === 0) {
-      return '';
-    } else if (password.length < 8) {
-      return 'Weak';
-    } else if (password.length < 12) {
-      return 'Moderate';
-    } else {
-      return 'Strong';
-    }
-  };
-
-  const getPasswordStrengthSegment = () => {
-    switch (passwordStrength) {
-      case 'Weak':
-        return 33;
-      case 'Moderate':
-        return 66;
-      case 'Strong':
-        return 100;
-      default:
-        return '';
-    }
-  };
-
-  const getPasswordStrengthColor = (strength: string) => {
-    switch (strength) {
-      case 'Weak':
-        return 'text-red-500';
-      case 'Moderate':
-        return 'text-yellow-500';
-      case 'Strong':
-        return 'text-green-500';
-      default:
-        return '';
-    }
-  };
-
-  const getPasswordBG = (strength: string) => {
-    switch (strength) {
-      case 'Weak':
-        return 'bg-red-500';
-      case 'Moderate':
-        return 'bg-yellow-500';
-      case 'Strong':
-        return 'bg-green-500';
-      default:
-        return '';
     }
   };
 
@@ -145,7 +88,7 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
       <div className="relative">
         <input
           id={options.name ? `${options.name.replace(/\s+/g, '-').toLowerCase()}-input` : ''}
-          type={options.type === 'password' && !passwordVisible ? 'password' : 'text'}
+          type={options.type === 'password' ? 'password' : 'text'}
           className={`mt-1 block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'
             } rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm text-white`}
           placeholder={options.placeholder}
@@ -166,25 +109,12 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
           <button
             type="button"
             className="absolute inset-y-0 right-0 px-2 py-1"
-            onClick={togglePasswordVisibility}
+            // togglePasswordVisibility function is no longer necessary here
           >
-            {passwordVisible ? <FaRegEyeSlash/> : <FaRegEye/>}
+            {/* Icon for toggling password visibility */}
           </button>
         )}
       </div>
-      {options.type === 'password' && (
-        <div className="flex flex-col items-start mt-4">
-          <div className={`w-full h-2 bg-gray-200 rounded-md overflow-hidden`}>
-            <div
-              style={{ width: `${Number(getPasswordStrengthSegment())}%` }}
-              className={`h-full ${getPasswordBG(passwordStrength)}`}
-            />
-          </div>
-          <p className="mt-2 text-sm">
-            Password Strength: <span className={getPasswordStrengthColor(passwordStrength)}>{passwordStrength}</span>
-          </p>
-        </div>
-      )}
       {error && (
         <p className="mt-1 text-sm text-red-500">{error}</p>
       )}
