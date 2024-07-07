@@ -85,4 +85,27 @@
       rounded-md text-white bg-gray-900 text-xs font-bold
       transition-all duration-200 scale-0 origin-left;
     }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(67, 1, 223, 0.527);
+      animation: ripple-effect 0.5s linear;
+      pointer-events: none;
+    }
   }
+  
+  @keyframes ripple-effect {
+    from {
+      width: 0;
+      height: 0;
+      opacity: 0.5;
+    }
+    to {
+      width: 1000px;
+      height: 1000px;
+      opacity: 0;
+    }
+  }
+  

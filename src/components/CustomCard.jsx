@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -7,26 +7,10 @@ import {
   Typography,
 } from '@mui/material';
 
-interface CustomCardProps {
-  title: string;
-  content: string;
-  imageSrc: string;
-  time: string;
-  unreadMessages?: number;
-  isActive?: boolean;
-}
+const CustomCard = ({ title, content, imageSrc, time, unreadMessages = 0, isActive = false }) => {
+  const [ripple, setRipple] = useState({ left: 0, top: 0 });
 
-const CustomCard: React.FC<CustomCardProps> = ({
-  title,
-  content,
-  imageSrc,
-  time,
-  unreadMessages = 0,
-  isActive = false,
-}) => {
-  const [ripple, setRipple] = useState<{ left: number; top: number } | null>(null);
-
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleClick = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;

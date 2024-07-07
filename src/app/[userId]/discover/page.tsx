@@ -1,72 +1,64 @@
-'use client';
 import React from 'react';
 import CustomCard from '@/components/CustomCard';
 
-interface UserDetailsProps {
+interface DiscoverProps {
   params: {
     userId: string;
   };
 }
 
-function Discover({ params }: UserDetailsProps) {
-  const list = [
+const Discover: React.FC<DiscoverProps> = ({ params }) => {
+  const cardData = [
     {
-      title: "Orange",
-      img: "/logo.jpeg",
-      price: "$5.50",
+      title: 'Orange',
+      content: 'Delicious and juicy fruit.',
+      imageSrc: '/logo.jpeg',
+      time: '10:00 AM',
+      unreadMessages: 2,
+      isActive: true,
     },
     {
-      title: "Tangerine",
-      img: "/logo.jpeg",
-      price: "$3.00",
+      title: 'Tangerine',
+      content: 'Sweet and tangy citrus fruit.',
+      imageSrc: '/logo.jpeg',
+      time: '11:30 AM',
+      unreadMessages: 0,
+      isActive: false,
     },
     {
-      title: "Raspberry",
-      img: "/logo.jpeg",
-      price: "$10.00",
+      title: 'Raspberry',
+      content: 'Small, juicy, and rich in antioxidants.',
+      imageSrc: '/logo.jpeg',
+      time: '1:00 PM',
+      isActive: true,
     },
     {
-      title: "Lemon",
-      img: "/logo.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/logo.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/logo.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/logo.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/logo.jpeg",
-      price: "$12.20",
+      title: 'Lemon',
+      content: 'Sour yet refreshing citrus fruit.',
+      imageSrc: '/logo.jpeg',
+      time: '3:30 PM',
+      unreadMessages: 1,
     },
   ];
 
   return (
-    <div className='ml-16'>
+    <div className="ml-16">
       <h1>{params.userId}: Discover</h1>
-      <div className="gap-4 grid grid-cols-4 sm:grid-cols-2">
-        {list.map((item, index) => (
+      <div className="grid gap-4 grid-cols-1">
+        {cardData.map((item, index) => (
           <CustomCard
             key={index}
             title={item.title}
-            image={item.img}
-            label={item.price}
+            content={item.content}
+            imageSrc={item.imageSrc}
+            time={item.time}
+            unreadMessages={item.unreadMessages}
+            isActive={item.isActive}
           />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Discover;

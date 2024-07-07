@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import CustomInput from '@/components/CustomInput';
-import { Button } from '@nextui-org/button';
+import SubmitButton from '@/components/CustomButton'; // Import SubmitButton instead of CustomButton
 
 interface UserDetailsProps {
   params: {
@@ -247,7 +247,16 @@ const UserDetails: React.FC<UserDetailsProps> = ({ params }) => {
               </p>
             </div>
           )}
-          <Button type="submit">Submit</Button>
+          {/* Integrate SubmitButton component with props */}
+          <SubmitButton
+            isLoading={false}
+            onClick={handleSubmit} // Assuming handleSubmit is your submit function
+            backgroundColor="#2196f3"
+            rippleColor="#1976d2"
+            textColor="white"
+          >
+            Submit
+          </SubmitButton>
         </form>
       </div>
     </div>
