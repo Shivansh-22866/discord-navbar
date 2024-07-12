@@ -67,7 +67,7 @@ const CustomPDF = ({ formData }) => {
 
         {/* Section 4: Platform and Escrow Services */}
         <Text style={styles.sectionTitle}>4. PLATFORM AND ESCROW SERVICES</Text>
-        <Text style={styles.text}>4.1 This Agreement is facilitated through the platform "frover.io", operated by the Platform Provider.</Text>
+        <Text style={styles.text}>4.1 This Agreement is facilitated through the platform &quot;frover.io&quot;, operated by the Platform Provider.</Text>
         <Text style={styles.text}>4.2 The Platform Provider shall act as an escrow agent, holding the Advertiser’s payment until the successful completion of the Influencer’s obligations.</Text>
 
         {/* Section 5: Execution of Agreement */}
