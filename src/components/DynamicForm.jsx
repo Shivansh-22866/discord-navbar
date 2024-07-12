@@ -1,6 +1,8 @@
-'use client';
-import { Button, ButtonBase } from '@mui/material';
+'use client'
 import React, { useState } from 'react';
+import { ButtonBase } from '@mui/material';
+import CustomPDF from '@/components/CustomPDF';
+import { PDFViewer } from '@react-pdf/renderer';
 
 const DynamicForm = () => {
     // State for the main form fields
@@ -16,6 +18,7 @@ const DynamicForm = () => {
     // State for Instagram section
     const [instagramPosts, setInstagramPosts] = useState([]);
     const [instagramStories, setInstagramStories] = useState([]);
+    const [formData, setFormData] = useState();
 
     // Function to handle adding items to YouTube section
     const addYoutubeItem = (section) => {
@@ -77,6 +80,8 @@ const DynamicForm = () => {
                 stories: instagramStories
             }
         };
+        setFormData(formData);
+        console.log(formData);
         console.log(JSON.stringify(formData, null, 2));
     };
 
@@ -85,7 +90,7 @@ const DynamicForm = () => {
             <h2 className="text-xl font-bold mb-4">Dynamic Nested Form</h2>
 
             <div className="mb-4">
-                <label className="block mb-4">Party 1 Name:</label>
+                <label className="block mb-2">Party 1 Name:</label>
                 <input
                     type="text"
                     className="border border-gray-300 px-3 py-2 w-full rounded-full"
@@ -95,7 +100,7 @@ const DynamicForm = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block mb-4">Date:</label>
+                <label className="block mb-2">Date:</label>
                 <input
                     type="date"
                     className="border border-gray-300 px-3 py-2 w-full rounded-full"
@@ -105,7 +110,7 @@ const DynamicForm = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block mb-4">Party 2 Name:</label>
+                <label className="block mb-2">Party 2 Name:</label>
                 <input
                     type="text"
                     className="border border-gray-300 px-3 py-2 w-full rounded-full"
@@ -115,7 +120,7 @@ const DynamicForm = () => {
             </div>
 
             <div className="mb-4">
-                <label className="block mb-4">Other Stuff:</label>
+                <label className="block mb-2">Other Stuff:</label>
                 <input
                     type="text"
                     className="border border-gray-300 px-3 py-2 w-full rounded-full"
@@ -124,239 +129,256 @@ const DynamicForm = () => {
                 />
             </div>
 
-            <div className="mb-4">
-                <h3 className="text-lg font-bold mb-2">YouTube</h3>
+            <div className="mb-8 border border-gray-300 rounded-3xl p-4">
+                <h3 className="font-bold text-lg mb-2">YouTube</h3>
 
-                <div className='ml-16 ml-'>
-                    <div>
-                        <h4 className="text-lg font-bold mb-2">Shorts 
-                            <ButtonBase
-                                className="rounded-full font-bold px-4 py-2"
-                                onClick={() => addYoutubeItem('shorts')}
-                            >
-                                +
-                            </ButtonBase>
-                        </h4>
-                        {youtubeShorts.map((item, index) => (
-                            <div key={index} className="m-8 flex flex-col w-3/4 gap-2">
-                                <input
-                                    type="date"
-                                    placeholder="Date"
-                                    className="border border-gray-300 px-3 py-2 rounded-full"
-                                    value={item.date}
-                                    onChange={(e) => {
-                                        const updatedShorts = [...youtubeShorts];
-                                        updatedShorts[index].date = e.target.value;
-                                        setYoutubeShorts(updatedShorts);
-                                    }}
-                                />
-                                <input
-                                    type="time"
-                                    placeholder="Time"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.time}
-                                    onChange={(e) => {
-                                        const updatedShorts = [...youtubeShorts];
-                                        updatedShorts[index].time = e.target.value;
-                                        setYoutubeShorts(updatedShorts);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Details"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.details}
-                                    onChange={(e) => {
-                                        const updatedShorts = [...youtubeShorts];
-                                        updatedShorts[index].details = e.target.value;
-                                        setYoutubeShorts(updatedShorts);
-                                    }}
-                                />
+                <div className="mb-6 rounded-3xl">
+                    <h4 className="text-md font-bold mb-4">Shorts</h4>
+                    {youtubeShorts.map((item, index) => (
+                        <div key={index} className="mb-4 flex flex-col border-gray-300 border p-4 rounded-4xl gap-2 rounded-3xl">
+                            <div className="flex items-center justify-between mb-2 gap-2">
+                                <span className="font-bold text-sm mr-2">Short {index + 1}</span>
                                 <button
-                                    className="bg-red-500 text-white px-3 py-2 ml-2 rounded-full"
+                                    className="bg-red-500 text-white px-4 py-4 ml-auto rounded-full font-bold"
                                     onClick={() => removeYoutubeItem('shorts', index)}
                                 >
-                                    Remove
+                                    -
                                 </button>
                             </div>
-                        ))}
+                            <input
+                                type="date"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                value={item.date}
+                                onChange={(e) => {
+                                    const updatedShorts = [...youtubeShorts];
+                                    updatedShorts[index].date = e.target.value;
+                                    setYoutubeShorts(updatedShorts);
+                                }}
+                            />
+                            <input
+                                type="time"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                value={item.time}
+                                onChange={(e) => {
+                                    const updatedShorts = [...youtubeShorts];
+                                    updatedShorts[index].time = e.target.value;
+                                    setYoutubeShorts(updatedShorts);
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full"
+                                value={item.details}
+                                onChange={(e) => {
+                                    const updatedShorts = [...youtubeShorts];
+                                    updatedShorts[index].details = e.target.value;
+                                    setYoutubeShorts(updatedShorts);
+                                }}
+                            />
+                        </div>
+                    ))}
+                    <div className="flex justify-end">
+                        <ButtonBase
+                            className="rounded-full font-bold px-4 py-2 w-full"
+                            style={{ backgroundColor: "lightgray" }}
+                            onClick={() => addYoutubeItem('shorts')}
+                        >
+                            ADD Short {youtubeShorts.length+1}
+                        </ButtonBase>
                     </div>
+                </div>
 
-                    <div>
-                        <h4 className="text-lg font-bold mb-2">Videos
-                            <ButtonBase
-                                className="px-4 py-2 rounded-full"
-                                onClick={() => addYoutubeItem('videos')}
-                            >
-                                +
-                            </ButtonBase>
-                        </h4>
-                        {youtubeVideos.map((item, index) => (
-                            <div key={index} className="m-8 flex flex-col w-3/4 gap-2">
-                                <input
-                                    type="date"
-                                    placeholder="Date"
-                                    className="border border-gray-300 px-3 py-2 rounded-full"
-                                    value={item.date}
-                                    onChange={(e) => {
-                                        const updatedVideos = [...youtubeVideos];
-                                        updatedVideos[index].date = e.target.value;
-                                        setYoutubeVideos(updatedVideos);
-                                    }}
-                                />
-                                <input
-                                    type="time"
-                                    placeholder="Time"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.time}
-                                    onChange={(e) => {
-                                        const updatedVideos = [...youtubeVideos];
-                                        updatedVideos[index].time = e.target.value;
-                                        setYoutubeVideos(updatedVideos);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Details"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.details}
-                                    onChange={(e) => {
-                                        const updatedVideos = [...youtubeVideos];
-                                        updatedVideos[index].details = e.target.value;
-                                        setYoutubeVideos(updatedVideos);
-                                    }}
-                                />
+                <div>
+                    <h4 className="text-md font-bold mt-4 mb-4">Videos</h4>
+                    {youtubeVideos.map((item, index) => (
+                        <div key={index} className="mb-4 border-gray-300 border p-4 rounded-3xl flex flex-col gap-2">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="font-bold mr-2 text-sm">Video {index + 1}</span>
                                 <button
-                                    className="bg-red-500 text-white px-3 py-2 rounded-full ml-2"
+                                    className="bg-red-500 text-white px-4 py-4 ml-auto rounded-full font-bold"
                                     onClick={() => removeYoutubeItem('videos', index)}
                                 >
-                                    Remove
+                                    -
                                 </button>
                             </div>
-                        ))}
+                            <input
+                                type="date"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                value={item.date}
+                                onChange={(e) => {
+                                    const updatedVideos = [...youtubeVideos];
+                                    updatedVideos[index].date = e.target.value;
+                                    setYoutubeVideos(updatedVideos);
+                                }}
+                            />
+                            <input
+                                type="time"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                value={item.time}
+                                onChange={(e) => {
+                                    const updatedVideos = [...youtubeVideos];
+                                    updatedVideos[index].time = e.target.value;
+                                    setYoutubeVideos(updatedVideos);
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full"
+                                value={item.details}
+                                onChange={(e) => {
+                                    const updatedVideos = [...youtubeVideos];
+                                    updatedVideos[index].details = e.target.value;
+                                    setYoutubeVideos(updatedVideos);
+                                }}
+                            />
+                        </div>
+                    ))}
+                    <div className="flex justify-end">
+                        <ButtonBase
+                            className="rounded-full font-bold px-4 py-2 w-full"
+                            style={{ backgroundColor: "lightgray" }}
+                            onClick={() => addYoutubeItem('videos')}
+                        >
+                            ADD Video {youtubeVideos.length + 1}
+                        </ButtonBase>
                     </div>
                 </div>
             </div>
-
-            <div className="mb-4">
+            <br/>
+            <div className="mb-8 border border-gray-300 rounded-3xl p-4">
                 <h3 className="text-lg font-bold mb-2">Instagram</h3>
-                    <div className='ml-16'>
-                        <div>
-                        <h4 className="text-lg font-bold">Posts
-                        <ButtonBase
-                            className="rounded-full font-bold px-4 py-2"
-                            onClick={() => addInstagramItem('posts')}
-                        >
-                            +
-                        </ButtonBase>
-                        </h4>
-                        {instagramPosts.map((item, index) => (
-                            <div key={index} className="m-8 flex flex-col w-3/4 gap-2">
-                                <input
-                                    type="text"
-                                    placeholder="Date"
-                                    className="border border-gray-300 px-3 py-2 rounded-full"
-                                    value={item.date}
-                                    onChange={(e) => {
-                                        const updatedPosts = [...instagramPosts];
-                                        updatedPosts[index].date = e.target.value;
-                                        setInstagramPosts(updatedPosts);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Time"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.time}
-                                    onChange={(e) => {
-                                        const updatedPosts = [...instagramPosts];
-                                        updatedPosts[index].time = e.target.value;
-                                        setInstagramPosts(updatedPosts);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Details"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.details}
-                                    onChange={(e) => {
-                                        const updatedPosts = [...instagramPosts];
-                                        updatedPosts[index].details = e.target.value;
-                                        setInstagramPosts(updatedPosts);
-                                    }}
-                                />
+
+                <div className="mb-6">
+                    <h4 className="text-md font-bold mb-4">Posts</h4>
+                    {instagramPosts.map((item, index) => (
+                        <div key={index} className="mb-4 border-gray-400 border rounded-3xl p-4 flex flex-col gap-2 text-sm">
+                            <div className="flex items-center mb-4 justify-between">
+                                <span className="font-bold mr-2">Post {index + 1}</span>
                                 <button
-                                    className="bg-red-500 text-white px-3 py-2 rounded-full ml-2"
+                                    className="bg-red-500 text-white px-4 py-4 ml-auto rounded-full font-bold"
                                     onClick={() => removeInstagramItem('posts', index)}
                                 >
-                                    Remove
+                                    -
                                 </button>
                             </div>
-                        ))}
-                    </div>
-
-                    <div>
-                        <h4 className="text-lg font-bold mb-2">Stories
+                            <input
+                                type="date"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                placeholder="Date"
+                                value={item.date}
+                                onChange={(e) => {
+                                    const updatedPosts = [...instagramPosts];
+                                    updatedPosts[index].date = e.target.value;
+                                    setInstagramPosts(updatedPosts);
+                                }}
+                            />
+                            <input
+                                type="time"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                placeholder="Time"
+                                value={item.time}
+                                onChange={(e) => {
+                                    const updatedPosts = [...instagramPosts];
+                                    updatedPosts[index].time = e.target.value;
+                                    setInstagramPosts(updatedPosts);
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full"
+                                placeholder="Details"
+                                value={item.details}
+                                onChange={(e) => {
+                                    const updatedPosts = [...instagramPosts];
+                                    updatedPosts[index].details = e.target.value;
+                                    setInstagramPosts(updatedPosts);
+                                }}
+                            />
+                        </div>
+                    ))}
+                    <div className="flex justify-end">
                         <ButtonBase
-                            className="rounded-full font-bold px-4 py-2"
-                            onClick={() => addInstagramItem('stories')}
+                            className="rounded-full font-bold px-4 py-2 w-full"
+                            style={{ backgroundColor: "lightgray" }}
+                            onClick={() => addInstagramItem('posts')}
                         >
-                            +
+                            ADD Post {instagramPosts.length + 1}
                         </ButtonBase>
-                        </h4>
-                        {instagramStories.map((item, index) => (
-                            <div key={index} className="m-8 flex flex-col w-3/4 gap-2">
-                                <input
-                                    type="text"
-                                    placeholder="Date"
-                                    className="border border-gray-300 px-3 py-2 rounded-full"
-                                    value={item.date}
-                                    onChange={(e) => {
-                                        const updatedStories = [...instagramStories];
-                                        updatedStories[index].date = e.target.value;
-                                        setInstagramStories(updatedStories);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Time"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.time}
-                                    onChange={(e) => {
-                                        const updatedStories = [...instagramStories];
-                                        updatedStories[index].time = e.target.value;
-                                        setInstagramStories(updatedStories);
-                                    }}
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Details"
-                                    className="border border-gray-300 px-3 py-2 ml-2 rounded-full"
-                                    value={item.details}
-                                    onChange={(e) => {
-                                        const updatedStories = [...instagramStories];
-                                        updatedStories[index].details = e.target.value;
-                                        setInstagramStories(updatedStories);
-                                    }}
-                                />
+                    </div>
+                </div>
+
+                <div>
+                    <h4 className="text-md font-bold my-2">Stories</h4>
+                    {instagramStories.map((item, index) => (
+                        <div key={index} className="mb-4 border-gray-300 rounded-3xl border p-4 text-sm flex flex-col gap-2">
+                            <div className="flex items-center mb-4 justify-between">
+                                <span className="font-bold mr-2">Story {index + 1}</span>
                                 <button
-                                    className="bg-red-500 text-white px-3 py-2 rounded-full ml-2"
+                                    className="bg-red-500 text-white px-4 py-4 ml-auto rounded-full font-bold"
                                     onClick={() => removeInstagramItem('stories', index)}
                                 >
-                                    Remove
+                                    -
                                 </button>
                             </div>
-                        ))}
+                            <input
+                                type="date"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                placeholder="Date"
+                                value={item.date}
+                                onChange={(e) => {
+                                    const updatedStories = [...instagramStories];
+                                    updatedStories[index].date = e.target.value;
+                                    setInstagramStories(updatedStories);
+                                }}
+                            />
+                            <input
+                                type="time"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full mb-2"
+                                placeholder="Time"
+                                value={item.time}
+                                onChange={(e) => {
+                                    const updatedStories = [...instagramStories];
+                                    updatedStories[index].time = e.target.value;
+                                    setInstagramStories(updatedStories);
+                                }}
+                            />
+                            <input
+                                type="text"
+                                className="border border-gray-300 px-3 py-2 rounded-full w-full"
+                                placeholder="Details"
+                                value={item.details}
+                                onChange={(e) => {
+                                    const updatedStories = [...instagramStories];
+                                    updatedStories[index].details = e.target.value;
+                                    setInstagramStories(updatedStories);
+                                }}
+                            />
+                        </div>
+                    ))}
+                    <div className="flex justify-end">
+                        <ButtonBase
+                            className="rounded-full font-bold px-4 py-2 w-full"
+                            style={{ backgroundColor: "lightgray" }}
+                            onClick={() => addInstagramItem('stories')}
+                        >
+                            ADD Story {instagramStories.length + 1}
+                        </ButtonBase>
                     </div>
-                    </div>
+                </div>
             </div>
-
-            <button
-                className="bg-green-500 text-white px-4 py-2 rounded"
+            <br/>
+            <ButtonBase
+                className="bg-green-500 text-white px-4 py-2 rounded-full font-bold"
                 onClick={generateJSON}
             >
                 Generate JSON
-            </button>
+            </ButtonBase>
+            {formData && 
+            <div className='h-[400px]'>
+                <PDFViewer className='w-full h-[400px]' >
+                    <CustomPDF formData={formData}/>
+                </PDFViewer>
+            </div>}
         </div>
     );
 };
