@@ -16,10 +16,10 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.title}>INFLUENCER MARKETING AGREEMENT</Text>
 
         {/* Introduction */}
-        <Text style={styles.sectionTitle}>This Influencer Marketing Agreement (the “Agreement”) is entered into on {formData.date} by and between:</Text>
-        <Text style={styles.text}>{formData.advertiserName}, hereinafter referred to as the “Advertiser”</Text>
-        <Text style={styles.text}>{formData.influencerName}, hereinafter referred to as the “Influencer”</Text>
-        <Text style={styles.text}>{formData.platformProviderName}, hereinafter referred to as the “Platform Provider”</Text>
+        <Text style={styles.sectionTitle}>This Influencer Marketing Agreement (the &ldquo;Agreement&rdquo;) is entered into on {formData.date} by and between:</Text>
+        <Text style={styles.text}>{formData.advertiserName}, hereinafter referred to as the &ldquo;Advertiser&rdquo;</Text>
+        <Text style={styles.text}>{formData.influencerName}, hereinafter referred to as the &ldquo;Influencer&rdquo;</Text>
+        <Text style={styles.text}>{formData.platformProviderName}, hereinafter referred to as the &ldquo;Platform Provider&rdquo;</Text>
 
         {/* Section 1: Scope of Work */}
         <Text style={styles.sectionTitle}>1. SCOPE OF WORK</Text>
@@ -51,13 +51,13 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.sectionTitle}>2. COMPENSATION AND FEES</Text>
         <Text style={styles.text}>2.1 The Advertiser agrees to pay a total sum of {formData.totalAmount} for the services outlined in this Agreement.</Text>
         <Text style={styles.text}>2.2 The payment structure is as follows:</Text>
-        <Text style={styles.subtext}>a) Influencer’s compensation: {formData.influencerAmount}</Text>
-        <Text style={styles.subtext}>b) Frover’s service fee: {formData.froverFeeAmount} ({formData.froverFeePercentage}% of the total amount)</Text>
+        <Text style={styles.subtext}>a) Influencer&rsquo;s compensation: {formData.influencerAmount}</Text>
+        <Text style={styles.subtext}>b) Frover&rsquo;s service fee: {formData.froverFeeAmount} ({formData.froverFeePercentage}% of the total amount)</Text>
         <Text style={styles.subtext}>c) Transaction fee: {formData.transactionFeeAmount}</Text>
 
-        <Text style={styles.text}>2.3 The Advertiser shall pay the total sum of {formData.totalAmount} to the Platform Provider, which includes the Influencer’s compensation, Frover’s service fee, and the transaction fee.</Text>
+        <Text style={styles.text}>2.3 The Advertiser shall pay the total sum of {formData.totalAmount} to the Platform Provider, which includes the Influencer&rsquo;s compensation, Frover&rsquo;s service fee, and the transaction fee.</Text>
 
-        <Text style={styles.text}>2.4 Upon successful completion of the Influencer’s obligations and after the review period, the Platform Provider shall transfer {formData.influencerAmount} to the Influencer, which is the total amount minus Frover’s service fee and the transaction fee.</Text>
+        <Text style={styles.text}>2.4 Upon successful completion of the Influencer&rsquo;s obligations and after the review period, the Platform Provider shall transfer {formData.influencerAmount} to the Influencer, which is the total amount minus Frover&rsquo;s service fee and the transaction fee.</Text>
 
         <Text style={styles.text}>2.5 Payment Disputes: In the event of any payment disputes, the parties agree to first attempt to resolve the issue amicably. If no resolution is reached within 14 days, the dispute resolution process outlined in Section 12 will be initiated.</Text>
 
@@ -68,7 +68,7 @@ const CustomPDF = ({ formData }) => {
         {/* Section 4: Platform and Escrow Services */}
         <Text style={styles.sectionTitle}>4. PLATFORM AND ESCROW SERVICES</Text>
         <Text style={styles.text}>4.1 This Agreement is facilitated through the platform &quot;frover.io&quot;, operated by the Platform Provider.</Text>
-        <Text style={styles.text}>4.2 The Platform Provider shall act as an escrow agent, holding the Advertiser’s payment until the successful completion of the Influencer’s obligations.</Text>
+        <Text style={styles.text}>4.2 The Platform Provider shall act as an escrow agent, holding the Advertiser&rsquo;s payment until the successful completion of the Influencer&rsquo;s obligations.</Text>
 
         {/* Section 5: Execution of Agreement */}
         <Text style={styles.sectionTitle}>5. EXECUTION OF AGREEMENT</Text>
@@ -79,17 +79,17 @@ const CustomPDF = ({ formData }) => {
         {/* Section 6: Influencer’s Obligations */}
         <Text style={styles.sectionTitle}>6. INFLUENCER’S OBLIGATIONS</Text>
         <Text style={styles.text}>6.1 The Influencer shall create and publish the content as specified in Section 1 of this Agreement.</Text>
-        <Text style={styles.text}>6.2 The Influencer shall ensure that all content complies with the Advertiser’s brand guidelines and any specific instructions provided.</Text>
-        <Text style={styles.text}>6.3 The Influencer shall update the status of the content creation and publication on the Platform Provider’s website (frover.io) upon completion of each task.</Text>
+        <Text style={styles.text}>6.2 The Influencer shall ensure that all content complies with the Advertiser&rsquo;s brand guidelines and any specific instructions provided.</Text>
+        <Text style={styles.text}>6.3 The Influencer shall update the status of the content creation and publication on the Platform Provider&rsquo;s website (frover.io) upon completion of each task.</Text>
 
         {/* Section 7: Advertiser’s Obligations */}
         <Text style={styles.sectionTitle}>7. ADVERTISER’S OBLIGATIONS</Text>
         <Text style={styles.text}>7.1 The Advertiser shall provide the Influencer with all necessary materials, guidelines, and information required for the creation of the content.</Text>
-        <Text style={styles.text}>7.2 The Advertiser shall make the full payment to the Platform Provider prior to the commencement of the Influencer’s services.</Text>
+        <Text style={styles.text}>7.2 The Advertiser shall make the full payment to the Platform Provider prior to the commencement of the Influencer&rsquo;s services.</Text>
 
         {/* Section 8: Platform Provider’s Obligations */}
         <Text style={styles.sectionTitle}>8. PLATFORM PROVIDER’S OBLIGATIONS</Text>
-        <Text style={styles.text}>8.1 The Platform Provider shall hold the Advertiser’s payment of {formData.totalAmount} in escrow until the successful completion of the Influencer’s obligations.</Text>
+        <Text style={styles.text}>8.1 The Platform Provider shall hold the Advertiser&rsquo;s payment of {formData.totalAmount} in escrow until the successful completion of the Influencer&rsquo;s obligations.</Text>
         <Text style={styles.text}>8.2 The Advertiser shall release the payment to the Influencer within [NUMBER] business days after the Influencer has updated the status of all required content as completed on the platform and the Advertiser has approved the content (if applicable).</Text>
         <Text style={styles.text}>8.3 The Platform Provider shall retain its service fee of {formData.froverFeeAmount} and the transaction fee of {formData.transactionFeeAmount} from the total payment made by the Advertiser.</Text>
 
@@ -97,7 +97,7 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.sectionTitle}>9. INTELLECTUAL PROPERTY</Text>
         <Text style={styles.text}>9.1 The Advertiser grants the Influencer a limited, non-exclusive license to use its trademarks, logos, and other branded materials solely for the purpose of creating the content specified in this Agreement.</Text>
         <Text style={styles.text}>9.2 The Influencer grants the Advertiser a perpetual, worldwide, royalty-free license to use, reproduce, distribute, and display the content created under this Agreement for marketing and promotional purposes.</Text>
-        <Text style={styles.text}>9.3 The Influencer retains ownership of the created content but grants the Advertiser an exclusive license to use the content for {formData.duration} from the date of posting. After this period, the license becomes non-exclusive and perpetual.</Text>
+        <Text style={styles.text}>9.3 The Influencer retains ownership of the created content but grants the Advertiser an exclusive license to use the content for {formData.exclusiveLicenseDuration} from the date of posting. After this period, the license becomes non-exclusive and perpetual.</Text>
         <Text style={styles.text}>9.4 The Influencer agrees not to use the content created under this Agreement for promoting competing brands or products for a period of {formData.restrictionDuration} from the date of posting.</Text>
 
         {/* Section 10: Confidentiality */}
@@ -126,13 +126,13 @@ const CustomPDF = ({ formData }) => {
         {/* Section 15: Regulatory Compliance */}
         <Text style={styles.sectionTitle}>15. REGULATORY COMPLIANCE</Text>
         <Text style={styles.text}>15.1 The Influencer agrees to comply with all applicable laws and regulations regarding sponsored content, including clearly disclosing the sponsored nature of the content in accordance with the Federal Trade Commission (FTC) guidelines or equivalent local regulations.</Text>
-        <Text style={styles.text}>15.2 The Influencer shall use appropriate disclosure language such as “#ad”, “#sponsored”, or “Paid partnership with {formData.advertiserName}” in a clear and conspicuous manner in all sponsored content.</Text>
+        <Text style={styles.text}>15.2 The Influencer shall use appropriate disclosure language such as &ldquo;#ad&rdquo;, &ldquo;#sponsored&rdquo;, or &ldquo;Paid partnership with {formData.advertiserName}&rdquo; in a clear and conspicuous manner in all sponsored content.</Text>
 
         {/* Section 16: Limitations of Liability */}
         <Text style={styles.sectionTitle}>16. LIMITATIONS OF LIABILITY</Text>
         <Text style={styles.text}>16.1 The parties acknowledge that some statements in this document are entered by the Advertiser and may not be enforceable by law. Each party is responsible for ensuring their compliance with applicable laws and regulations.</Text>
-        <Text style={styles.text}>16.2 The Influencer shall be solely responsible for the content they create and publish. The Advertiser and the Platform Provider shall not be held liable for any claims arising from the Influencer’s content, including but not limited to copyright infringement, defamation, or misrepresentation.</Text>
-        <Text style={styles.text}>16.3 In the event of content removal after the initial posting period, the Advertiser reserves the right to take legal action against the Influencer. The Platform Provider’s responsibility is limited to providing relevant documentation related to this Agreement upon request.</Text>
+        <Text style={styles.text}>16.2 The Influencer shall be solely responsible for the content they create and publish. The Advertiser and the Platform Provider shall not be held liable for any claims arising from the Influencer&rsquo;s content, including but not limited to copyright infringement, defamation, or misrepresentation.</Text>
+        <Text style={styles.text}>16.3 In the event of content removal after the initial posting period, the Advertiser reserves the right to take legal action against the Influencer. The Platform Provider&rsquo;s responsibility is limited to providing relevant documentation related to this Agreement upon request.</Text>
 
         {/* Signature */}
         <Text style={styles.text}>By signing this Agreement through the methods specified in Section 5, the parties acknowledge that they have read, understood, and agree to be bound by the terms and conditions set forth herein.</Text>
