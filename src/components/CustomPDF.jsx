@@ -51,11 +51,11 @@ const CustomPDF = ({ formData }) => {
 
         {/* Introduction */}
         <Text style={styles.sectionTitle}>
-          This Influencer Marketing Agreement (the "Agreement") is entered into on {formData.date} by and between:
+          This Influencer Marketing Agreement (the &quot;Agreement&quot;) is entered into on {formData.date} by and between:
         </Text>
-        <Text style={styles.text}>{formData.advertiserName}, hereinafter referred to as the "Advertiser"</Text>
-        <Text style={styles.text}>{formData.influencerName}, hereinafter referred to as the "Influencer"</Text>
-        <Text style={styles.text}>{formData.platformProviderName}, hereinafter referred to as the "Platform Provider"</Text>
+        <Text style={styles.text}>{formData.advertiserName}, hereinafter referred to as the &quot;Advertiser&quot;</Text>
+        <Text style={styles.text}>{formData.influencerName}, hereinafter referred to as the &quot;Influencer&quot;</Text>
+        <Text style={styles.text}>{formData.platformProviderName}, hereinafter referred to as the &quot;Platform Provider&quot;</Text>
 
         {/* Section 1: Scope of Work */}
         <Text style={styles.sectionTitle}>1. SCOPE OF WORK</Text>
@@ -87,13 +87,13 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.sectionTitle}>2. COMPENSATION AND FEES</Text>
         <Text style={styles.text}>2.1 The Advertiser agrees to pay a total sum of {formData.totalAmount} for the services outlined in this Agreement.</Text>
         <Text style={styles.text}>2.2 The payment structure is as follows:</Text>
-        <Text style={styles.subtext}>a) Influencer's compensation: {formData.influencerAmount}</Text>
-        <Text style={styles.subtext}>b) Frover's service fee: {formData.froverFeeAmount} ({formData.froverFeePercentage}% of the total amount)</Text>
+        <Text style={styles.subtext}>a) Influencer&apos;s compensation: {formData.influencerAmount}</Text>
+        <Text style={styles.subtext}>b) Frover&apos;s service fee: {formData.froverFeeAmount} ({formData.froverFeePercentage}% of the total amount)</Text>
         <Text style={styles.subtext}>c) Transaction fee: {formData.transactionFeeAmount}</Text>
 
-        <Text style={styles.text}>2.3 The Advertiser shall pay the total sum of {formData.totalAmount} to the Platform Provider, which includes the Influencer's compensation, Frover's service fee, and the transaction fee.</Text>
+        <Text style={styles.text}>2.3 The Advertiser shall pay the total sum of {formData.totalAmount} to the Platform Provider, which includes the Influencer&apos;s compensation, Frover&apos;s service fee, and the transaction fee.</Text>
 
-        <Text style={styles.text}>2.4 Upon successful completion of the Influencer's obligations and after the review period, the Platform Provider shall transfer {formData.influencerAmount} to the Influencer, which is the total amount minus Frover's service fee and the transaction fee.</Text>
+        <Text style={styles.text}>2.4 Upon successful completion of the Influencer&apos;s obligations and after the review period, the Platform Provider shall transfer {formData.influencerAmount} to the Influencer, which is the total amount minus Frover&apos;s service fee and the transaction fee.</Text>
 
         <Text style={styles.text}>2.5 Payment Disputes: In the event of any payment disputes, the parties agree to first attempt to resolve the issue amicably. If no resolution is reached within 14 days, the dispute resolution process outlined in Section 12 will be initiated.</Text>
 
@@ -103,8 +103,8 @@ const CustomPDF = ({ formData }) => {
 
         {/* Section 4: Platform and Escrow Services */}
         <Text style={styles.sectionTitle}>4. PLATFORM AND ESCROW SERVICES</Text>
-        <Text style={styles.text}>4.1 This Agreement is facilitated through the platform "frover.io", operated by the Platform Provider.</Text>
-        <Text style={styles.text}>4.2 The Platform Provider shall act as an escrow agent, holding the Advertiser's payment until the successful completion of the Influencer's obligations.</Text>
+        <Text style={styles.text}>4.1 This Agreement is facilitated through the platform &quot;frover.io&quot;, operated by the Platform Provider.</Text>
+        <Text style={styles.text}>4.2 The Platform Provider shall act as an escrow agent, holding the Advertiser&apos;s payment until the successful completion of the Influencer&apos;s obligations.</Text>
 
         {/* Section 5: Execution of Agreement */}
         <Text style={styles.sectionTitle}>5. EXECUTION OF AGREEMENT</Text>
@@ -112,20 +112,20 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.text}>5.2 The Advertiser shall be deemed to have signed this Agreement upon making the payment to the Platform Provider through the designated online payment method.</Text>
         <Text style={styles.text}>5.3 This Agreement shall come into effect only after both parties have completed their respective signing processes as outlined in 5.1 and 5.2.</Text>
 
-        {/* Section 6: Influencer’s Obligations */}
-        <Text style={styles.sectionTitle}>6. INFLUENCER’S OBLIGATIONS</Text>
+        {/* Section 6: Influencer&apos;s Obligations */}
+        <Text style={styles.sectionTitle}>6. INFLUENCER&apos;S OBLIGATIONS</Text>
         <Text style={styles.text}>6.1 The Influencer shall create and publish the content as specified in Section 1 of this Agreement.</Text>
-        <Text style={styles.text}>6.2 The Influencer shall ensure that all content complies with the Advertiser's brand guidelines and any specific instructions provided.</Text>
-        <Text style={styles.text}>6.3 The Influencer shall update the status of the content creation and publication on the Platform Provider's website (frover.io) upon completion of each task.</Text>
+        <Text style={styles.text}>6.2 The Influencer shall ensure that all content complies with the Advertiser&apos;s brand guidelines and any specific instructions provided.</Text>
+        <Text style={styles.text}>6.3 The Influencer shall update the status of the content creation and publication on the Platform Provider&apos;s website (frover.io) upon completion of each task.</Text>
 
-        {/* Section 7: Advertiser’s Obligations */}
-        <Text style={styles.sectionTitle}>7. ADVERTISER’S OBLIGATIONS</Text>
+        {/* Section 7: Advertiser&apos;s Obligations */}
+        <Text style={styles.sectionTitle}>7. ADVERTISER&apos;S OBLIGATIONS</Text>
         <Text style={styles.text}>7.1 The Advertiser shall provide the Influencer with all necessary materials, guidelines, and information required for the creation of the content.</Text>
-        <Text style={styles.text}>7.2 The Advertiser shall make the full payment to the Platform Provider prior to the commencement of the Influencer's services.</Text>
+        <Text style={styles.text}>7.2 The Advertiser shall make the full payment to the Platform Provider prior to the commencement of the Influencer&apos;s services.</Text>
 
-        {/* Section 8: Platform Provider’s Obligations */}
-        <Text style={styles.sectionTitle}>8. PLATFORM PROVIDER’S OBLIGATIONS</Text>
-        <Text style={styles.text}>8.1 The Platform Provider shall hold the Advertiser's payment of {formData.totalAmount} in escrow until the successful completion of the Influencer's obligations.</Text>
+        {/* Section 8: Platform Provider&apos;s Obligations */}
+        <Text style={styles.sectionTitle}>8. PLATFORM PROVIDER&apos;S OBLIGATIONS</Text>
+        <Text style={styles.text}>8.1 The Platform Provider shall hold the Advertiser&apos;s payment of {formData.totalAmount} in escrow until the successful completion of the Influencer&apos;s obligations.</Text>
         <Text style={styles.text}>8.2 The Advertiser shall release the payment of {formData.influencerAmount} to the Influencer within [X] business days after the Influencer has updated the status of all required content as completed on the platform and the Advertiser has approved the content (if applicable).</Text>
         <Text style={styles.text}>8.3 The Platform Provider shall retain its service fee of {formData.froverFeeAmount} and the transaction fee of {formData.transactionFeeAmount} from the total payment made by the Advertiser.</Text>
 
@@ -142,7 +142,7 @@ const CustomPDF = ({ formData }) => {
 
         {/* Section 11: Termination */}
         <Text style={styles.sectionTitle}>11. TERMINATION</Text>
-        <Text style={styles.text}>11.1 Either party may terminate this Agreement with [X] days' written notice to the other party, without cause.</Text>
+        <Text style={styles.text}>11.1 Either party may terminate this Agreement with [X] days&apos; written notice to the other party, without cause.</Text>
         <Text style={styles.text}>11.2 Either party may terminate this Agreement immediately if the other party breaches any material provision of this Agreement and fails to remedy such breach within [X] days of receiving written notice of the breach.</Text>
 
         {/* Section 12: Dispute Resolution */}
@@ -169,7 +169,7 @@ const CustomPDF = ({ formData }) => {
 
         {/* Section 17: Waiver */}
         <Text style={styles.sectionTitle}>17. WAIVER</Text>
-        <Text style={styles.text}>17.1 The failure of either party to enforce any provision of this Agreement shall not be construed as a waiver or limitation of that party's right to subsequently enforce and compel strict compliance with every provision of this Agreement.</Text>
+        <Text style={styles.text}>17.1 The failure of either party to enforce any provision of this Agreement shall not be construed as a waiver or limitation of that party&apos;s right to subsequently enforce and compel strict compliance with every provision of this Agreement.</Text>
 
         {/* Section 18: Counterparts */}
         <Text style={styles.sectionTitle}>18. COUNTERPARTS</Text>
@@ -213,19 +213,19 @@ const CustomPDF = ({ formData }) => {
     <div>
       {isMobile ? (
         // Render BlobProvider for mobile screens
-      <div className='flex flex-col gap-2 justify-center items-center h-800 bg-slate-800 text-white' style={{height: 600, width: 300}}>
-        <div>Influencer_Marketing_Agreement.pdf</div>
-        <BlobProvider document={<MyDocument />} fileName="Influencer_Marketing_Agreement.pdf">
-          {({ url }) => (
-            <a href={url} download="Influencer_Marketing_Agreement.pdf">
-              <Button className='p-4' variant='contained'>
-                <IoMdDownload className='m-2'/> 
-                Open
-              </Button>
-            </a>
-          )}
-        </BlobProvider>
-      </div>
+        <div className='flex flex-col gap-2 justify-center items-center h-800 bg-slate-800 text-white' style={{height: 600, width: 300}}>
+          <div>Influencer_Marketing_Agreement.pdf</div>
+          <BlobProvider document={<MyDocument />} fileName="Influencer_Marketing_Agreement.pdf">
+            {({ url }) => (
+              <a href={url} download="Influencer_Marketing_Agreement.pdf">
+                <Button className='p-4' variant='contained'>
+                  <IoMdDownload className='m-2'/> 
+                  Open
+                </Button>
+              </a>
+            )}
+          </BlobProvider>
+        </div>
 
       ) : (
         // Render PDFViewer for larger screens
