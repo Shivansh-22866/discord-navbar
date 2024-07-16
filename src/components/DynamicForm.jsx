@@ -387,9 +387,7 @@ const DynamicForm = () => {
             </TabsContent>
             <TabsContent value='pdf'>
                 <div className='h-full'>
-                    <PDFViewer className='w-full max-h-full' height={1200}>
-                        <CustomPDF formData={formData}/>
-                    </PDFViewer>
+                    <CustomPDF formData={formData}/>
                 </div>
             </TabsContent>
         </Tabs>
