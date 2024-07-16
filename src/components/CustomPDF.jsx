@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text, Font, StyleSheet } from '@react-pdf/renderer';
+import { BlobProvider, Document, Page, Text, Font, StyleSheet } from '@react-pdf/renderer';
 
 // Register external font
 Font.register({
@@ -7,9 +7,8 @@ Font.register({
   src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
 });
 
-// Define the custom PDF component
 const CustomPDF = ({ formData }) => {
-  return (
+  const MyDocument = () => (
     <Document>
       <Page style={styles.page}>
         {/* Title */}
@@ -97,51 +96,60 @@ const CustomPDF = ({ formData }) => {
         <Text style={styles.sectionTitle}>9. INTELLECTUAL PROPERTY</Text>
         <Text style={styles.text}>9.1 The Advertiser grants the Influencer a limited, non-exclusive license to use its trademarks, logos, and other branded materials solely for the purpose of creating the content specified in this Agreement.</Text>
         <Text style={styles.text}>9.2 The Influencer grants the Advertiser a perpetual, worldwide, royalty-free license to use, reproduce, distribute, and display the content created under this Agreement for marketing and promotional purposes.</Text>
-        <Text style={styles.text}>9.3 The Influencer retains ownership of the created content but grants the Advertiser an exclusive license to use the content for {formData.exclusiveLicenseDuration} from the date of posting. After this period, the license becomes non-exclusive and perpetual.</Text>
-        <Text style={styles.text}>9.4 The Influencer agrees not to use the content created under this Agreement for promoting competing brands or products for a period of {formData.restrictionDuration} from the date of posting.</Text>
+        <Text style={styles.text}>9.3 The Influencer retains ownership of the created content but grants the Advertiser an exclusive license to use the content for {formData.exclusiveLicenseDuration} from the date of posting. After this period, the license becomes non-exclusive, and the Influencer may use the content for their purposes.</Text>
 
         {/* Section 10: Confidentiality */}
         <Text style={styles.sectionTitle}>10. CONFIDENTIALITY</Text>
-        <Text style={styles.text}>10.1 Both parties agree to keep confidential any proprietary or sensitive information shared during the course of this Agreement.</Text>
-        <Text style={styles.text}>10.2 Confidential Information includes, but is not limited to, business strategies, marketing plans, customer lists, financial information, and any other information marked as confidential or that would reasonably be understood to be confidential.</Text>
-        <Text style={styles.text}>10.3 The confidentiality obligations under this Agreement shall survive the termination of this Agreement for a period of {formData.confidentialityDuration}.</Text>
+        <Text style={styles.text}>10.1 Both parties agree to keep confidential any proprietary or sensitive information disclosed during the course of this Agreement, including but not limited to business strategies, financial information, and creative concepts.</Text>
+        <Text style={styles.text}>10.2 This obligation of confidentiality shall survive the termination of this Agreement.</Text>
 
         {/* Section 11: Termination */}
         <Text style={styles.sectionTitle}>11. TERMINATION</Text>
-        <Text style={styles.text}>11.1 This Agreement may be terminated by either party upon [NUMBER] days of receiving notice.</Text>
-        <Text style={styles.text}>11.2 If the Influencer fails to post the content within the specified date ranges in Section 1.2, this Agreement will be automatically terminated. In such case, the Platform Provider shall refund the full payment to the Advertiser, less any applicable transaction fees.</Text>
+        <Text style={styles.text}>11.1 Either party may terminate this Agreement upon written notice to the other party if the other party materially breaches any provision of this Agreement and fails to cure such breach within 30 days of receiving written notice thereof.</Text>
+        <Text style={styles.text}>11.2 The Platform Provider may terminate this Agreement immediately if it determines, in its sole discretion, that either party has engaged in fraudulent or illegal activities related to this Agreement.</Text>
 
         {/* Section 12: Dispute Resolution */}
         <Text style={styles.sectionTitle}>12. DISPUTE RESOLUTION</Text>
-        <Text style={styles.text}>Any disputes arising from this Agreement shall be resolved through arbitration in accordance with the rules of {formData.arbitrationBody} in {formData.jurisdiction}.</Text>
+        <Text style={styles.text}>12.1 Any dispute arising out of or relating to this Agreement shall be resolved through negotiation between the parties.</Text>
+        <Text style={styles.text}>12.2 If the parties fail to reach a resolution through negotiation, either party may initiate binding arbitration as the sole means of resolving the dispute. The arbitration shall be conducted in accordance with the rules of the American Arbitration Association.</Text>
 
-        {/* Section 13: Governing Law */}
-        <Text style={styles.sectionTitle}>13. GOVERNING LAW</Text>
-        <Text style={styles.text}>This Agreement shall be governed by and construed in accordance with the laws of {formData.jurisdiction}.</Text>
+        {/* Section 13: Governing Law and Jurisdiction */}
+        <Text style={styles.sectionTitle}>13. GOVERNING LAW AND JURISDICTION</Text>
+        <Text style={styles.text}>13.1 This Agreement shall be governed by and construed in accordance with the laws of the State of New York.</Text>
+        <Text style={styles.text}>13.2 Any legal action or proceeding arising out of or relating to this Agreement shall be brought exclusively in the federal or state courts located in New York County, New York.</Text>
 
-        {/* Section 14: Entire Agreement */}
-        <Text style={styles.sectionTitle}>14. ENTIRE AGREEMENT</Text>
-        <Text style={styles.text}>This Agreement constitutes the entire understanding between the parties and supersedes all prior agreements, representations, and understandings.</Text>
-
-        {/* Section 15: Regulatory Compliance */}
-        <Text style={styles.sectionTitle}>15. REGULATORY COMPLIANCE</Text>
-        <Text style={styles.text}>15.1 The Influencer agrees to comply with all applicable laws and regulations regarding sponsored content, including clearly disclosing the sponsored nature of the content in accordance with the Federal Trade Commission (FTC) guidelines or equivalent local regulations.</Text>
-        <Text style={styles.text}>15.2 The Influencer shall use appropriate disclosure language such as &ldquo;#ad&rdquo;, &ldquo;#sponsored&rdquo;, or &ldquo;Paid partnership with {formData.advertiserName}&rdquo; in a clear and conspicuous manner in all sponsored content.</Text>
-
-        {/* Section 16: Limitations of Liability */}
-        <Text style={styles.sectionTitle}>16. LIMITATIONS OF LIABILITY</Text>
-        <Text style={styles.text}>16.1 The parties acknowledge that some statements in this document are entered by the Advertiser and may not be enforceable by law. Each party is responsible for ensuring their compliance with applicable laws and regulations.</Text>
-        <Text style={styles.text}>16.2 The Influencer shall be solely responsible for the content they create and publish. The Advertiser and the Platform Provider shall not be held liable for any claims arising from the Influencer&rsquo;s content, including but not limited to copyright infringement, defamation, or misrepresentation.</Text>
-        <Text style={styles.text}>16.3 In the event of content removal after the initial posting period, the Advertiser reserves the right to take legal action against the Influencer. The Platform Provider&rsquo;s responsibility is limited to providing relevant documentation related to this Agreement upon request.</Text>
-
-        {/* Signature */}
-        <Text style={styles.text}>By signing this Agreement through the methods specified in Section 5, the parties acknowledge that they have read, understood, and agree to be bound by the terms and conditions set forth herein.</Text>
+        {/* Section 14: Miscellaneous */}
+        <Text style={styles.sectionTitle}>14. MISCELLANEOUS</Text>
+        <Text style={styles.text}>14.1 This Agreement constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior agreements, oral or written, relating to such subject matter.</Text>
+        <Text style={styles.text}>14.2 This Agreement may be amended or modified only by a written instrument signed by both parties.</Text>
+        <Text style={styles.text}>14.3 If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.</Text>
       </Page>
     </Document>
   );
+
+  return (
+    <BlobProvider document={<MyDocument />}>
+      {({ blob, url, loading, error }) => {
+        // Handle loading and error states
+        if (loading) {
+          return <Text>Loading...</Text>;
+        }
+        if (error) {
+          return <Text>Error: {error.message}</Text>;
+        }
+
+        // Render a link to the Blob URL
+        return (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            Click here to view the PDF
+          </a>
+        );
+      }}
+    </BlobProvider>
+  );
 };
 
-// Define styles for the PDF
+// Define styles
 const styles = StyleSheet.create({
   page: {
     paddingTop: 35,
@@ -166,9 +174,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Times-Roman'
   },
   subtext: {
-    fontSize: 11,
+    fontSize: 10,
+    marginBottom: 2,
     marginLeft: 10,
-    marginBottom: 3,
     fontFamily: 'Times-Roman'
   }
 });
