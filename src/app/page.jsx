@@ -30,7 +30,7 @@ const ParentComponent = () => {
                     clearInterval(intervalId);
                     setTimeout(() => {
                         // Simulate an error scenario
-                        const error = Math.random() < -9; // 50% chance of error
+                        const error = Math.random() < 0.1; // 90% chance of success
                         if (error) {
                             setLoading(false);
                             setBgColorClass('bg-red-500');
