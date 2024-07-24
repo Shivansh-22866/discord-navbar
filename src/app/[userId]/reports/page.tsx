@@ -34,12 +34,6 @@ function Reports({ params }: UserDetailsProps) {
     <div className='ml-16'>
         <h1>{params.userId}: Reports</h1>
         <div className="flex justify-center items-center h-screen bg-slate-800">
-            <AsyncButton
-                onClick={handleClick}
-                onSuccess={handleSuccess}
-                onError={handleError}
-                initialText="Click Me!"
-            />
         </div>
     </div>
   )
