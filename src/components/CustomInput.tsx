@@ -91,7 +91,7 @@ const CustomInput: React.FC<InputProps> = ({ options, label, isVisible = true })
           id={options.name ? `${options.name.replace(/\s+/g, '-').toLowerCase()}-input` : ''}
           type={options.type === 'password' && !passwordVisible ? 'password' : 'text'}
           className={`mt-1 block w-full px-3 py-2 border ${error ? 'border-red-500' : 'border-gray-300'
-            } rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm text-white`}
+            } rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm`}
           placeholder={options.placeholder}
           value={options.value}
           onChange={handleChange}
