@@ -1,4 +1,13 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
+import withPWA from 'next-pwa';
+import runtimeCaching from 'next-pwa/cache.js';
 
-export default nextConfig;
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+export default withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
+});
